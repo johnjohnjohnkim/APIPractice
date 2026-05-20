@@ -2,16 +2,13 @@ from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
 
-
 class PostBase(BaseModel):
     title: str
     content: str
     published: bool = True #defaults to True
 
-
 class CreatePost(PostBase):
     pass
-
 # class Post(BaseModel):
 #     title: str
 #     content: str
@@ -22,6 +19,7 @@ class CreatePost(PostBase):
 class Post(PostBase):
     id: int
     created_at: datetime
+    user_id: int
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -41,4 +39,4 @@ class Token(BaseModel):
     token_type: str
 
 class TokenData(BaseModel):
-    id: Optional[str]
+    id: Optional[int]

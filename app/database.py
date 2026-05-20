@@ -1,9 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from .config import settings
 
 # 'postresql://<username>:<password>@<ip-address>/hostname/<database name>'
-SQLALCHEMY_DATABASE_URL = 'postgresql://postgres:Laughforhelp1!@localhost/fastapi'
+SQLALCHEMY_DATABASE_URL = f"postgresql://{settings.DATABASE_USERNAME}:{settings.DATABASE_PASSWORD}@{settings.DATABASE_HOSTNAME}/{settings.DATABASE_NAME}"
 
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
@@ -19,6 +20,5 @@ def get_db():
         yield db
     finally:
         db.close()
-
 
 #This code generally stays the same except the database url
